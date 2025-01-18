@@ -505,8 +505,13 @@ async def account_login(bot: Client, m: Message):
                 os.system(download_cmd)
                 
 
-            if "acecwply" in url:
-                cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
+            try:
+    # Previous code...
+    if "acecwply" in url:
+        cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
+    # Following code...
+except Exception as e:
+    await m.reply_text(f"An error occurred: {str(e)}")
 
             if "visionias" in url:
                 async with ClientSession() as session:
