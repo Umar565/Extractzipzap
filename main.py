@@ -503,8 +503,6 @@ async def account_login(bot: Client, m: Message):
             try:
                 download_cmd = f"{cmd} -R 25 --fragment-retries 25 --external-downloader aria2c --downloader-args 'aria2c: -x 16 -j 32'"
                 os.system(download_cmd)
-                
-        cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
         
             if "visionias" in url:
                 async with ClientSession() as session:
