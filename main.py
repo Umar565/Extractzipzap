@@ -503,11 +503,6 @@ async def account_login(bot: Client, m: Message):
             try:
                 download_cmd = f"{cmd} -R 25 --fragment-retries 25 --external-downloader aria2c --downloader-args 'aria2c: -x 16 -j 32'"
                 os.system(download_cmd)
-                      
-                print("mpd check")
-                key = await helper.get_drm_keys(url)
-                print(key)
-                await m.reply_text(f"got keys form api : \n`{key}`m
 
             except Exception as e:
                 await m.reply_text(
