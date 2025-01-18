@@ -505,16 +505,11 @@ async def account_login(bot: Client, m: Message):
                 os.system(download_cmd)
         
             try:
-    for i in range(arg, len(links)):
-        url = links[i][1]
-        name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@","").replace("*","").replace(".","").strip()
-        # await m.reply_text(name +":"+ url)
+                for i in range(arg, len(links)):
+                url = links[i][1]
+                name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@","").replace("*","").replace(".","").strip()
+                # await m.reply_text(name +":"+ url)
 
-        try:
-    for i in range(arg, len(links)):
-        url = links[i][1]
-        name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@","").replace("*","").replace(".","").strip()
-        # await m.reply_text(name +":"+ url)
 
         try:
             if "visionias" in url:
