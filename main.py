@@ -504,13 +504,6 @@ async def account_login(bot: Client, m: Message):
                 download_cmd = f"{cmd} -R 25 --fragment-retries 25 --external-downloader aria2c --downloader-args 'aria2c: -x 16 -j 32'"
                 os.system(download_cmd)
                       
-            if "master.mpd" in url :
-                if "https://sec1.pw.live/" in url:
-                    url = url.replace("https://sec1.pw.live/","https://d1d34p8vz63oiq.cloudfront.net/")
-                    print(url)
-                else: 
-                    url = url    
-
                 print("mpd check")
                 key = await helper.get_drm_keys(url)
                 print(key)
