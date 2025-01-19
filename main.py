@@ -1,13 +1,4 @@
 import os
-import subprocess
-
-# Clone the repository
-repo_url = "https://github.com/krishan041/Convert-2-Video.git"
-clone_dir = "Convert-2-Video"
-
-if not os.path.exists(clone_dir):
-    subprocess.run(["git", "clone", repo_url, clone_dir])
-    
 import re
 import sys
 import json
