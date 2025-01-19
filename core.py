@@ -20,6 +20,27 @@ import time
 import random
 import os
 
+import os
+import requests
+
+def download_file(url, save_path):
+    try:
+        response = requests.get(url, stream=True)
+        response.raise_for_status()
+
+        with open(save_path, 'wb') as file:
+            for chunk in response.iter_content(chunk_size=8192):
+                file.write(chunk)
+        
+        print(f"File downloaded successfully: {save_path}")
+    except requests.exceptions.RequestException as e:
+        print(f"Error downloading the file: {e}")
+
+if __name__ == "__main__":
+    url = "https://testing-news.kalampublication.com/get/get_mpd_drm_links?VideoId=68699"
+    save_path = "downloaded_file.mpd"
+    download_file(url, save_path)
+    
 def duration(filename):
     result = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
                              "format=duration", "-of",
