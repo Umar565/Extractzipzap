@@ -42,6 +42,18 @@ async def download(url,name):
 
 
 
+async def get_drm_keys(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            if resp.status == 200:
+                data = await resp.json()
+                return data.get("keys", [])
+            else:
+                print(f"Failed to get DRM keys from {url} with status {resp.status}")
+                return []
+
+
+
 def parse_vid_info(info):
     info = info.strip()
     info = info.split("\n")
