@@ -124,9 +124,13 @@ async def account_login(bot: Client, m: Message):
            await m.reply_text("∝ 𝐈𝐧𝐯𝐚𝐥𝐢𝐝 𝐟𝐢𝐥𝐞 𝐢𝐧𝐩𝐮𝐭.")
            os.remove(x)
            return
-	    await editable.edit(f"∝ 𝐓𝐨𝐭𝐚𝐥 𝐋𝐢𝐧𝐤𝐬 𝐅𝐨𝐮𝐧𝐝 𝐀𝐫𝐞 🔗 **{len(links)}**\n\n𝐒𝐞𝐧𝐝 𝐅𝐫𝐨𝐦 𝐖𝐡𝐞𝐫𝐞 𝐘𝐨𝐮 𝐖𝐚𝐧𝐭 𝐓𝐨 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝. 𝐈𝐧𝐢𝐭𝐢𝐚𝐥 𝐢𝐬 **1**")
-    raw_text = input0.text
-    await input0.delete(True)
+	    
+	    await editable.edit(
+              f"∝ 𝐓𝐨𝐭𝐚𝐥 𝐋𝐢𝐧𝐤𝐬 𝐅𝐨𝐮𝐧𝐝 𝐀𝐫𝐞 🔗 **{len(links)}**\n\n"
+              "𝐒𝐞𝐧𝐝 𝐅𝐫𝐨𝐦 𝐖𝐡𝐞𝐫𝐞 𝐘𝐨𝐮 𝐖𝐚𝐧𝐭 𝐓𝐨 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝. 𝐈𝐧𝐢𝐭𝐢𝐚𝐥 𝐢𝐬 **1**"
+	      )  
+	       raw_text = input0.text
+                 await input0.delete(True)
     
     await editable.edit("**Enter Batch Name or send d for grabing from text filename.**")
     input1: Message = await bot.listen(editable.chat.id)
