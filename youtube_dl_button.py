@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
-logger = logging.getLogger(__name__)
-
 import os
 import json
 import math
@@ -115,6 +107,9 @@ async def youtube_dl_call_back(bot, update):
     if youtube_dl_password is not None:
         command_to_exec.append("--password")
         command_to_exec.append(youtube_dl_password)
+    if os.path.exists("youtube_cookies.txt"):
+        command_to_exec.append("--cookies")
+        command_to_exec.append("youtube_cookies.txt")
     command_to_exec.append("--no-warnings")
     command_to_exec.append("--quiet")
 
@@ -126,7 +121,7 @@ async def youtube_dl_call_back(bot, update):
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
 
-    ad_string_to_replace = "please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output."
+    ad_string_to_replace = "please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl [...]
     if e_response and ad_string_to_replace in e_response:
         error_message = e_response.replace(ad_string_to_replace, "")
         await bot.edit_message_text(
@@ -212,7 +207,7 @@ async def youtube_dl_call_back(bot, update):
                 asyncio.create_task(clendir(download_directory))
                 asyncio.create_task(clendir(thumbnail))
                 await bot.edit_message_text(
-                text="✅ Uploaded sucessfully ✓\n\nJOIN US : @LazyDeveloper",
+                text="✅ Uploaded successfully ✓\n\nJOIN US : @LazyDeveloper",
                 chat_id=update.message.chat.id,
                 message_id=update.message.message_id,
                 disable_web_page_preview=True)
