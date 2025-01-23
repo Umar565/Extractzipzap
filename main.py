@@ -253,8 +253,11 @@ async def account_login(bot: Client, m: Message):
 
             try:  
                 
-                cc = f'** {str(count).zfill(3)}.** {𝗻𝗮𝗺𝗲𝟭}{MR}.mkv\n**Batch »** {raw_text0}\n\n'
-                cc1 = f'** {str(count).zfill(3)}.** {𝗻𝗮𝗺𝗲𝟭}{MR}.pdf \n**Batch »** {raw_text0}\n\n'
+                
+                cc = f'**🎥 VIDEO ID: {str(count).zfill(3)}.\n\n📄 Title: {name1} {res} Sanju.mkv\n\n<pre><code>🔖 Batch Name: {b_name}</code></pre>\n\n📥 Extracted By : {CR}**'
+                cc1 = f'**📁 FILE ID: {str(count).zfill(3)}.\n\n📄 Title: {name1} Moni.pdf \n\n<pre><code>🔖 Batch Name: {b_name}</code></pre>\n\n📥 Extracted By : {CR}**'
+                    
+                
                 if "drive" in url:
                     try:
                         ka = await helper.download(url, name)
@@ -269,19 +272,46 @@ async def account_login(bot: Client, m: Message):
                 
                 elif ".pdf" in url:
                     try:
-                        cmd = f'yt-dlp -o "{name}.pdf" "{url}"'
-                        download_cmd = f"{cmd} -R 25 --fragment-retries 25"
-                        os.system(download_cmd)
-                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)
-                        count += 1
-                        os.remove(f'{name}.pdf')
+                        await asyncio.sleep(4)
+        # Replace spaces with %20 in the URL
+                        url = url.replace(" ", "%20")
+ 
+        # Create a cloudscraper session
+                        scraper = cloudscraper.create_scraper()
+
+        # Send a GET request to download the PDF
+                        response = scraper.get(url)
+
+        # Check if the response status is OK
+                        if response.status_code == 200:
+            # Write the PDF content to a file
+                            with open(f'{name}.pdf', 'wb') as file:
+                                file.write(response.content)
+
+            # Send the PDF document
+                            await asyncio.sleep(4)
+                            copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)
+                            count += 1
+
+            # Remove the PDF file after sending
+                            os.remove(f'{name}.pdf')
+                        else:
+                            await m.reply_text(f"Failed to download PDF: {response.status_code} {response.reason}")
+
                     except FloodWait as e:
                         await m.reply_text(str(e))
-                        time.sleep(e.x)
+                        await asyncio.sleep(2)  # Use asyncio.sleep for non-blocking sleep
+                        return  # Exit the function to avoid continuation
+
+                    except Exception as e:
+                        await m.reply_text(f"An error occurred: {str(e)}")
+                        await asyncio.sleep(4)  # You can replace this with more specific
                         continue
+                        
+                          
                 else:
-                    Show = f"**⥥ Downloading »**\n\n**Name »** `{name}\nQuality » {raw_text2}`\n\n**Piracy is illegal 🚫**\n\nEnter /terms To know our terms and conditions."
-                    prog = await m.reply_text(Show)
+                    Show = f"❊⟱ 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠 ⟱❊ »\n\n📄 Title:- `{name}\n\n⌨ 𝐐𝐮𝐥𝐢𝐭𝐲 » {raw_text2}`\n\n**🔗 𝐔𝐑𝐋 »** `{url}`"
+                    prog = await m.reply_text(f"**Downloading:-**\n\n**📄 Title:-** `{name}\n\nQuality - {raw_text2}`\n\n**link:**`{url}`\n\n **Bot Made By 👑 KING**")
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
                     await prog.delete(True)
@@ -291,13 +321,14 @@ async def account_login(bot: Client, m: Message):
 
             except Exception as e:
                 await m.reply_text(
-                    f"**downloading Interupted **\n{str(e)}\n**Name** » {name}\n**Link** » `{url}`"
+                    f"⌘ 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠 𝐈𝐧𝐭𝐞𝐫𝐮𝐩𝐭𝐞𝐝\n\n⌘ 𝐍𝐚𝐦𝐞 » {name}\n⌘ 𝐋𝐢𝐧𝐤 » `{url}`"
                 )
                 continue
 
     except Exception as e:
         await m.reply_text(e)
-    await m.reply_text("Done")
+    await m.reply_text("🔰Done Boss🔰")
+	
 
 
 bot.run()
