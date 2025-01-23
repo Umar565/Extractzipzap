@@ -1,11 +1,13 @@
-# Sanjay Kagra 
-# Add your details here and then deploy by clicking on HEROKU Deploy button
-import os
+api_id = "27536109" #change_with_your_Api_id.
 
-API_ID    = os.environ.get("API_ID", "27536109")
-API_HASH  = os.environ.get("API_HASH", "b84d7d4dfa33904d36b85e1ead16bd63")
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "") 
+api_hash = "b84d7d4dfa33904d36b85e1ead16bd63" #change_with_your_Api_hash.
 
-#WEBHOOK = True  # Don't change this
-#PORT = int(os.environ.get("PORT", 8080))  # Default to 8000 if not set
+bot_token = "" #change_with_your_bot_token.
 
+auth_users = [6428531614] #change_with_your_user_id.
+
+sudo_user = "6428531614" #change_with_your_user_id.
+
+log_channel = -1002380827214 #change_with_your_channel_id.
+
+txt_channel = -1002380827214 #change_with_your_channel_id.
