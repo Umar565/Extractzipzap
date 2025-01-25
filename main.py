@@ -223,8 +223,7 @@ async def account_login(bot: Client, m: Message):
                     domain_name = None
                   else:
                     proceed_further_1 = True
-
-               if domain_name and proceed_further_1:
+                      if domain_name and proceed_further_1:
                   if "https" in site_link:
                       referer_link = "https://" + domain_name + "/"
                    else:
