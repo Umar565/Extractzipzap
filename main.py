@@ -209,48 +209,49 @@ async def account_login(bot: Client, m: Message):
             url = "https://" + V
             
             class ParseLink(object):
-    def olive(Q, url, path):
-        if not re.search("https://videos.sproutvideo.com/embed/.*/.*", url):
-            print("\nThis does not seem like a valid type of url supported by the script. Follow the instructions on the README correctly and enter the embed link!")
-        else:
-            site_link = Store.SPROUT_URL  # "https://discuss.oliveboard.in/"
-
-            try:
-                domain_name = re.search(
-                    'http.?://([A-Za-z_0-9.-]+).*', site_link).group(1)
-            except Exception as e:
-                print(f"\nError: {e}")
-                domain_name = None
-            else:
-                proceed_further_1 = True
-
-        if domain_name and proceed_further_1:
-            if "https" in site_link:
-                referer_link = "https://" + domain_name + "/"
-            else:
-                referer_link = "http://" + domain_name + "/"
-
-            headers = {
-                'Referer': referer_link,
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36}'
-            }
-            response = requests.get(url, headers=headers)
-
-            if response.status_code != 200:
-                print(f"\nError - Site Response:\n{response.text}")
-                print("\n\nMake sure your links are correct!")
-            else:
-                print("\nA successful response has been issued!")
-                try:
-                    response_parts = response.text.split("var dat = '")
-                    token = response_parts[1].split("'")[0]
-                except Exception as e:
-                    print(f"\nError: {e}")
-                    LOGS.error(str(e))
-                    # input("\nPress Enter to exit...")
+              def olive(Q, url, path):
+                if not 
+            re.search("https://videos.sproutvideo.com/embed/.*/.*", url):
+                   print("\nThis does not seem like a valid type of url supported by the script. Follow the instructions on the README correctly and enter the embed link!")
                 else:
-                    proceed_further_2 = True
+                  site_link = Store.SPROUT_URL  # "https://discuss.oliveboard.in/"
 
+                  try:
+                    domain_name = re.search(
+                     'http.?://([A-Za-z_0-9.-]+).*', site_link).group(1)
+                  except Exception as e:
+                    print(f"\nError: {e}")
+                    domain_name = None
+                  else:
+                    proceed_further_1 = True
+
+               if domain_name and proceed_further_1:
+                  if "https" in site_link:
+                      referer_link = "https://" + domain_name + "/"
+                   else:
+                     referer_link = "http://" + domain_name + "/"
+
+                   headers = {
+                    'Referer': referer_link,
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36}'
+                  }
+                  response = requests.get(url, headers=headers)
+
+                  if response.status_code != 200:
+                     print(f"\nError - Site Response:\n{response.text}")
+                     print("\n\nMake sure your links are correct!")
+                  else:
+                    print("\nA successful response has been issued!")
+                    try:
+                      response_parts = response.text.split("var dat = '")
+                      token = response_parts[1].split("'")[0]
+                    except Exception as e:
+                      print(f"\nError: {e}")
+                      LOGS.error(str(e))
+                      # input("\nPress Enter to exit...")
+                  else:
+                    proceed_further_2 = True
+                      
         if proceed_further_2:
             token_to_json = json.loads(
                 base64.urlsafe_b64decode(token).decode('UTF-8'))
