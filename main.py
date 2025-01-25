@@ -207,23 +207,24 @@ async def account_login(bot: Client, m: Message):
                .replace("youtube.com/embed/", "youtube.com/watch?v=")
             
             url = "https://" + V
+            
+            class ParseLink(object):
+    def olive(Q, url, path):
+        if not re.search("https://videos.sproutvideo.com/embed/.*/.*", url):
+            print("\nThis does not seem like a valid type of url supported by the script. Follow the instructions on the README correctly and enter the embed link!")
+        else:
+            site_link = Store.SPROUT_URL  # "https://discuss.oliveboard.in/"
 
-              class ParseLink(object):
-               def olive(Q, url, path):
-                     if not re.search("https://videos.sproutvideo.com/embed/.*/.*", url):
-                 print("\nThis does not seem like a valid type of url supported by the script. Follow the instructions on the README correctly and enter the embed link!")
-                    else:
-                      site_link = Store.SPROUT_URL  # "https://discuss.oliveboard.in/"
-   
-               try:
-                    domain_name = re.search(
-                     'http.?://([A-Za-z_0-9.-]+).*', site_link).group(1)
-                  except Exception as e:
-                       print(f"\nError: {e}")
-               else:
-                     proceed_further_1 = True
+            try:
+                domain_name = re.search(
+                    'http.?://([A-Za-z_0-9.-]+).*', site_link).group(1)
+            except Exception as e:
+                print(f"\nError: {e}")
+                domain_name = None
+            else:
+                proceed_further_1 = True
 
-        if proceed_further_1:
+        if domain_name and proceed_further_1:
             if "https" in site_link:
                 referer_link = "https://" + domain_name + "/"
             else:
