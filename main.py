@@ -222,33 +222,34 @@ async def account_login(bot: Client, m: Message):
                     print(f"\nError: {e}")
                     domain_name = None
                   else:
-                    proceed_further_1 = True
-                      if domain_name and proceed_further_1:
-                  if "https" in site_link:
-                      referer_link = "https://" + domain_name + "/"
-                   else:
-                     referer_link = "http://" + domain_name + "/"
+                     proceed_further_1 = True
 
-                   headers = {
-                    'Referer': referer_link,
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36}'
-                  }
-                  response = requests.get(url, headers=headers)
+                 if domain_name and proceed_further_1: 
+                    if "https" in site_link:
+                        referer_link = "https://" + domain_name + "/"
+                      else:
+                        referer_link = "http://" + domain_name + "/"
 
-                  if response.status_code != 200:
-                     print(f"\nError - Site Response:\n{response.text}")
-                     print("\n\nMake sure your links are correct!")
-                  else:
-                    print("\nA successful response has been issued!")
-                    try:
-                      response_parts = response.text.split("var dat = '")
-                      token = response_parts[1].split("'")[0]
-                    except Exception as e:
-                      print(f"\nError: {e}")
-                      LOGS.error(str(e))
+                      headers = {
+                       'Referer': referer_link,
+                       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36}'
+                     }
+                     response = requests.get(url, headers=headers)
+
+                     if response.status_code != 200:
+                        print(f"\nError - Site Response:\n{response.text}")
+                        print("\n\nMake sure your links are correct!")
+                      else:
+                        print("\nA successful response has been issued!")
+                        try:
+                           response_parts = response.text.split("var dat = '")
+                           token = response_parts[1].split("'")[0]
+                         except Exception as e:
+                           print(f"\nError: {e}")
+                           LOGS.error(str(e))
                       # input("\nPress Enter to exit...")
-                  else:
-                    proceed_further_2 = True
+                         else:
+                           proceed_further_2 = True
                       
         if proceed_further_2:
             token_to_json = json.loads(
