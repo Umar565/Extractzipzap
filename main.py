@@ -329,14 +329,13 @@ async def account_login(bot: Client, m: Message):
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Linux"',
         }
-        try:
-            response = requests.get(f'{link}', headers=headers)
-            r = response.content
-            soup = BeautifulSoup(r, 'html.parser')
-            paras = soup.find('script')
-            url = paras.text.split('"')[3]
-            # URL = visio_url(url , Q)
-            return url
+        response = requests.get(f'{link}', headers=headers)
+        r = response.content
+        soup = BeautifulSoup(r, 'html.parser')
+        paras = soup.find('script')
+        url = paras.text.split('"')[3]
+        URL = visio_url(url , Q)
+        return url
 
     def vision_mpd_link(r_link):
         link = f'http://visionias.in/student/videoplayer_v2/video.php?{r_link.split("?")[-1]}'
