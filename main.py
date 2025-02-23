@@ -313,7 +313,7 @@ async def account_login(bot: Client, m: Message):
                 print(f"\nError: {e}")
         return file_to_download
 
-    def vision_m3u8_link(link, Q):
+   def vision_m3u8_link(link, Q):
     Q = str(Q)
     headers = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -329,17 +329,23 @@ async def account_login(bot: Client, m: Message):
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': '"Linux"',
     }
+
     try:
-        response = requests.get(f'{link}', headers=headers)
-        response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
-        r = response.content
-        soup = BeautifulSoup(r, 'html.parser')
+        response = requests.get(link, headers=headers)  # Moved link into f-string if needed
+        response.raise_for_status() # Check for bad status codes
+
+        soup = BeautifulSoup(response.content, 'html.parser')
         paras = soup.find('script')
 
         if paras:
-            url = paras.text.split('"')[3]
-            print(url)
-            return url
+            text = paras.text
+            try:  # Nested try for split
+                url = text.split('"')[3]
+                print(url)
+                return url
+            except IndexError as e:
+                print(f"Error parsing script content: {e}")
+                return None
         else:
             print("No script tag found.")
             return None
@@ -347,11 +353,8 @@ async def account_login(bot: Client, m: Message):
     except requests.exceptions.RequestException as e:
         print(f"Error fetching URL: {e}")
         return None
-    except IndexError as e:
-        print(f"Error parsing script content: {e}")
-        return None
-    except Exception as e:  # Catch any other unexpected exceptions
-        print(f"An unexpected error occurred: {e}")
+    except Exception as e:
+        print(f"A general error occurred: {e}")
         return None
     
         
