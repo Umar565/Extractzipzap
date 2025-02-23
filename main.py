@@ -319,21 +319,7 @@ async def account_login(bot: Client, m: Message):
     
 
 
-    def classplus_link(link):
-        headers = {
-            'Host': 'api.classplusapp.com',
-            'x-access-token': Store.CPTOKEN,
-            'user-agent': 'Mobile-Android',
-            'app-version': '1.4.37.1',
-            'api-version': '18',
-            # 'accept-encoding': 'gzip',
-        }
-        response = requests.get(
-            f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={link}', headers=headers)
-        url = response.json()['url']
-        print(url)
-        return url
-
+    
     def is_pw(url):
         """
         Sample Link :- https://d1d34p8vz63oiq.cloudfront.net/8eca5705-a305-4c1d-863f-a5b101c1983a/master.m3u8
