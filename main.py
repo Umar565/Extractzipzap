@@ -334,6 +334,7 @@ async def account_login(bot: Client, m: Message):
         soup = BeautifulSoup(r, 'html.parser')
         paras = soup.find('script')
         url = paras.text.split('"')[3]
+        print(url)
         # URL = visio_url(url , Q)
         return url
         
