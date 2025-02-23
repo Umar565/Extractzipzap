@@ -313,7 +313,7 @@ async def account_login(bot: Client, m: Message):
                 print(f"\nError: {e}")
         return file_to_download
 
-    def vision_m3u8_link(link, Q):
+  """  def vision_m3u8_link(link, Q):
         Q = str(Q)
         headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -336,7 +336,7 @@ async def account_login(bot: Client, m: Message):
         url = paras.text.split('"')[3]
         print(url)
         # URL = visio_url(url , Q)
-        return url
+        return url"""
         
     def vision_mpd_link(r_link):
         link = f'http://visionias.in/student/videoplayer_v2/video.php?{r_link.split("?")[-1]}'
