@@ -331,25 +331,26 @@ async def account_login(bot: Client, m: Message):
     }
     try:
         response = requests.get(f'{link}', headers=headers)
-        response.raise_for_status() # Raise an exception for bad status codes (4xx or 5xx)
+        response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
         r = response.content
         soup = BeautifulSoup(r, 'html.parser')
         paras = soup.find('script')
-        if paras: # Check if a script tag was found
+
+        if paras:
             url = paras.text.split('"')[3]
             print(url)
             return url
         else:
             print("No script tag found.")
-            return None # Indicate that no URL was found
+            return None
 
     except requests.exceptions.RequestException as e:
         print(f"Error fetching URL: {e}")
         return None
-    except IndexError as e: # Handle potential index errors if the script content is unexpected
+    except IndexError as e:
         print(f"Error parsing script content: {e}")
         return None
-    except Exception as e:
+    except Exception as e:  # Catch any other unexpected exceptions
         print(f"An unexpected error occurred: {e}")
         return None
     
