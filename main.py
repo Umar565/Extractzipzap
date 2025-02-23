@@ -342,6 +342,16 @@ async def account_login(bot: Client, m: Message):
         else:
             print("No script tag found.")
             return None # Indicate that no URL was found
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching URL: {e}")
+        return None
+    except IndexError as e: # Handle potential index errors if the script content is unexpected
+        print(f"Error parsing script content: {e}")
+        return None
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return None
     
         
     def vision_mpd_link(r_link):
