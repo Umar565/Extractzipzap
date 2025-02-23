@@ -313,6 +313,7 @@ async def account_login(bot: Client, m: Message):
                 print(f"\nError: {e}")
         return file_to_download
 
+    
     def vision_m3u8_link(link, Q):
     Q = str(Q)
     headers = {
@@ -331,8 +332,8 @@ async def account_login(bot: Client, m: Message):
     }
 
     try:
-        response = requests.get(link, headers=headers)  # Moved link into f-string if needed
-        response.raise_for_status() # Check for bad status codes
+        response = requests.get(link, headers=headers)
+        response.raise_for_status()  # Check for bad status codes
 
         soup = BeautifulSoup(response.content, 'html.parser')
         paras = soup.find('script')
@@ -356,7 +357,6 @@ async def account_login(bot: Client, m: Message):
     except Exception as e:
         print(f"A general error occurred: {e}")
         return None
-    
         
     def vision_mpd_link(r_link):
         link = f'http://visionias.in/student/videoplayer_v2/video.php?{r_link.split("?")[-1]}'
