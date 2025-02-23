@@ -314,73 +314,9 @@ async def account_login(bot: Client, m: Message):
         return file_to_download
 
     
-    def vision_m3u8_link(link, Q):
-    Q = str(Q)
-    headers = {
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Connection': 'keep-alive',
-        'Referer': 'http://www.visionias.in/',
-        'Sec-Fetch-Dest': 'iframe',
-        'Sec-Fetch-Mode': 'navigate',
-        'Sec-Fetch-Site': 'cross-site',
-        'Upgrade-Insecure-Requests': '1',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
-        'sec-ch-ua': '".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Linux"',
-    }
-
-    try:
-        response = requests.get(link, headers=headers)
-        response.raise_for_status()  # Check for bad status codes
-
-        soup = BeautifulSoup(response.content, 'html.parser')
-        paras = soup.find('script')
-
-        if paras:
-            text = paras.text
-            try:  # Nested try for split
-                url = text.split('"')[3]
-                print(url)
-                return url
-            except IndexError as e:
-                print(f"Error parsing script content: {e}")
-                return None
-        else:
-            print("No script tag found.")
-            return None
-
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching URL: {e}")
-        return None
-    except Exception as e:
-        print(f"A general error occurred: {e}")
-        return None
+    
         
-    def vision_mpd_link(r_link):
-        link = f'http://visionias.in/student/videoplayer_v2/video.php?{r_link.split("?")[-1]}'
-        print(link)
-        headers = {
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-            'Accept-Language': 'en-US,en;q=0.9',
-            'Connection': 'keep-alive',
-            'Referer': 'http://www.visionias.in/',
-            'Sec-Fetch-Dest': 'iframe',
-            'Sec-Fetch-Mode': 'navigate',
-            'Sec-Fetch-Site': 'cross-site',
-            'Upgrade-Insecure-Requests': '1',
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Mobile Safari/537.36',
-            'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="101", "Google Chrome";v="101"',
-            'sec-ch-ua-mobile': '?1',
-            'sec-ch-ua-platform': '"Android"',
-        }
-        response = requests.get(f'{link}', headers=headers)
-        r = response.content
-        # r = open("vod.html")
-        soup = BeautifulSoup(r, features="xml")
-        res_link1 = soup.find_all("Location")[0].get_text()
-        return res_link1
+    
 
 
     def classplus_link(link):
